@@ -41,6 +41,22 @@ typedef enum : NSUInteger
 } MXDeviceVerificationErrorCode;
 
 
+#pragma mark - Requests
+
+/**
+ Posted on new device verification request.
+ */
+FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNewRequestNotification;
+
+/**
+ The key in the notification userInfo dictionary containing the `MXKeyVerificationRequest` instance.
+ */
+FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNotificationRequestKey;
+
+
+
+#pragma mark - Transactions
+
 /**
  Posted on new device verification transaction.
  */
@@ -81,28 +97,28 @@ FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNotificationTransac
 
 
 /**
- Accept an incoming key verification request by Direct Message.
+ Accept an incoming key verification request.
 
- @param event the event in the DM room.
+ @param request the request.
  @param method the method to use.
  @param success a block called when the operation succeeds.
  @param failure a block called when the operation fails.
  */
-- (void)acceptVerificationByDMFromEvent:(MXEvent*)event
-                                 method:(NSString*)method
-                                success:(void(^)(MXDeviceVerificationTransaction *transaction))success
-                                failure:(void(^)(NSError *error))failure;
+- (void)acceptVerificationRequest:(MXKeyVerificationRequest*)request
+                           method:(NSString*)method
+                          success:(void(^)(MXDeviceVerificationTransaction *transaction))success
+                          failure:(void(^)(NSError *error))failure;
 
 /**
- Cancel a key verification request or reject an incoming key verification request by Direct Message.
+ Cancel a key verification request or reject an incoming key verification request.
 
- @param event the original request event.
+ @param request the request.
  @param success a block called when the operation succeeds.
  @param failure a block called when the operation fails.
  */
-- (void)cancelVerificationByDMFromEvent:(MXEvent*)event
-                                success:(void(^)(void))success
-                                failure:(void(^)(NSError *error))failure;
+- (void)cancelVerificationRequest:(MXKeyVerificationRequest*)request
+                          success:(void(^)(void))success
+                          failure:(void(^)(NSError *error))failure;
 
 
 #pragma mark - Transactions
