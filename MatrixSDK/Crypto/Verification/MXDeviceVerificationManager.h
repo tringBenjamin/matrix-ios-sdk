@@ -17,7 +17,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MXKeyVerificationRequest.h"
+#import "MXKeyVerificationRequestManager.h"
 #import "MXDeviceVerificationTransaction.h"
 
 #import "MXSASTransaction.h"
@@ -41,22 +41,6 @@ typedef enum : NSUInteger
 } MXDeviceVerificationErrorCode;
 
 
-#pragma mark - Requests
-
-/**
- Posted on new device verification request.
- */
-FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNewRequestNotification;
-
-/**
- The key in the notification userInfo dictionary containing the `MXKeyVerificationRequest` instance.
- */
-FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNotificationRequestKey;
-
-
-
-#pragma mark - Transactions
-
 /**
  Posted on new device verification transaction.
  */
@@ -75,50 +59,9 @@ FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNotificationTransac
  */
 @interface MXDeviceVerificationManager : NSObject
 
-
 #pragma mark - Requests
 
-/**
- Make a key verification request by Direct Message.
-
- @param userId the other user id.
- @param roomId the room to exchange direct messages
- @param fallbackText a text description if the app does not support verification by DM.
- @param methods Verification methods like MXKeyVerificationMethodSAS.
- @param success a block called when the operation succeeds.
- @param failure a block called when the operation fails.
- */
-- (void)requestVerificationByDMWithUserId:(NSString*)userId
-                                   roomId:(NSString*)roomId
-                             fallbackText:(NSString*)fallbackText
-                                  methods:(NSArray<NSString*>*)methods
-                                  success:(void(^)(NSString *eventId))success
-                                  failure:(void(^)(NSError *error))failure;
-
-
-/**
- Accept an incoming key verification request.
-
- @param request the request.
- @param method the method to use.
- @param success a block called when the operation succeeds.
- @param failure a block called when the operation fails.
- */
-- (void)acceptVerificationRequest:(MXKeyVerificationRequest*)request
-                           method:(NSString*)method
-                          success:(void(^)(MXDeviceVerificationTransaction *transaction))success
-                          failure:(void(^)(NSError *error))failure;
-
-/**
- Cancel a key verification request or reject an incoming key verification request.
-
- @param request the request.
- @param success a block called when the operation succeeds.
- @param failure a block called when the operation fails.
- */
-- (void)cancelVerificationRequest:(MXKeyVerificationRequest*)request
-                          success:(void(^)(void))success
-                          failure:(void(^)(NSError *error))failure;
+@property (nonatomic, readonly) MXKeyVerificationRequestManager *requestManager;
 
 
 #pragma mark - Transactions

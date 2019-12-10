@@ -22,6 +22,8 @@
 #import "MXCrypto_Private.h"
 #import "MXDeviceVerificationManager_Private.h"
 
+#import "MXKeyVerificationRequestJSONModel.h"
+
 // Do not bother with retain cycles warnings in tests
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
@@ -484,11 +486,11 @@
         MXCredentials *bob = bobSession.matrixRestClient.credentials;
 
         // - Bob requests a verification of Alice in this Room
-        [bobSession.crypto.deviceVerificationManager requestVerificationByDMWithUserId:alice.userId
-                                                                                roomId:roomId
-                                                                          fallbackText:fallbackText
-                                                                               methods:@[MXKeyVerificationMethodSAS, @"toto"]
-                                                                               success:^(NSString * _Nonnull eventId)
+        [bobSession.crypto.deviceVerificationManager.requestManager requestVerificationByDMWithUserId:alice.userId
+                                                                                               roomId:roomId
+                                                                                         fallbackText:fallbackText
+                                                                                              methods:@[MXKeyVerificationMethodSAS, @"toto"]
+                                                                                              success:^(NSString * _Nonnull eventId)
          {
              requestEventId = eventId;
          }
@@ -511,12 +513,15 @@
                  XCTAssertEqualObjects(event.eventId, requestEventId);
 
                  // Check verification by DM request format
-                 MXKeyVerificationRequestJSONModel *request;
-                 MXJSONModelSetMXJSONModel(request, MXKeyVerificationRequestJSONModel.class, event.content);
+                 MXKeyVerificationRequestJSONModel *JSONRequest;
+                 MXJSONModelSetMXJSONModel(JSONRequest, MXKeyVerificationRequestJSONModel.class, event.content);
+                 XCTAssertNotNil(JSONRequest);
+
+                 MXKeyVerificationRequest *request = [aliceSession.crypto.deviceVerificationManager.requestManager verificationRequestInDMEvent:event];
                  XCTAssertNotNil(request);
 
                  // - Alice accepts it and begins a SAS verification
-                 [aliceSession.crypto.deviceVerificationManager acceptVerificationByDMFromEvent:event method:MXKeyVerificationMethodSAS success:^(MXDeviceVerificationTransaction * _Nonnull transactionFromAlicePOV) {
+                 [aliceSession.crypto.deviceVerificationManager.requestManager acceptVerificationRequest:request method:MXKeyVerificationMethodSAS success:^(MXDeviceVerificationTransaction * _Nonnull transactionFromAlicePOV) {
 
                      XCTAssertEqualObjects(transactionFromAlicePOV.transactionId, event.eventId);
 
@@ -664,11 +669,11 @@
         MXCredentials *alice = aliceSession.matrixRestClient.credentials;
 
         // - Bob requests a verification of Alice in this Room
-        [bobSession.crypto.deviceVerificationManager requestVerificationByDMWithUserId:alice.userId
-                                                                                roomId:roomId
-                                                                          fallbackText:fallbackText
-                                                                               methods:@[MXKeyVerificationMethodSAS, @"toto"]
-                                                                               success:^(NSString * _Nonnull eventId)
+        [bobSession.crypto.deviceVerificationManager.requestManager requestVerificationByDMWithUserId:alice.userId
+                                                                                               roomId:roomId
+                                                                                         fallbackText:fallbackText
+                                                                                              methods:@[MXKeyVerificationMethodSAS, @"toto"]
+                                                                                              success:^(NSString * _Nonnull eventId)
          {
              requestEventId = eventId;
          }
@@ -684,12 +689,15 @@
          {
              if ([event.content[@"msgtype"] isEqualToString:kMXMessageTypeKeyVerificationRequest])
              {
-                 MXKeyVerificationRequestJSONModel *request;
-                 MXJSONModelSetMXJSONModel(request, MXKeyVerificationRequestJSONModel.class, event.content);
+                 MXKeyVerificationRequestJSONModel *JSONRequest;
+                 MXJSONModelSetMXJSONModel(JSONRequest, MXKeyVerificationRequestJSONModel.class, event.content);
+                 XCTAssertNotNil(JSONRequest);
+
+                 MXKeyVerificationRequest *request = [aliceSession.crypto.deviceVerificationManager.requestManager verificationRequestInDMEvent:event];
                  XCTAssertNotNil(request);
 
                   // - Alice rejects the incoming request
-                 [aliceSession.crypto.deviceVerificationManager cancelVerificationByDMFromEvent:event success:^{
+                 [aliceSession.crypto.deviceVerificationManager.requestManager cancelVerificationRequest:request success:^{
 
                  } failure:^(NSError * _Nonnull error) {
 
@@ -719,7 +727,6 @@
                                     onEvent:checkCancelCancel];
         [bobSession listenToEventsOfTypes:@[kMXEventTypeStringKeyVerificationCancel]
                                   onEvent:checkCancelCancel];
-
     }];
 }
 

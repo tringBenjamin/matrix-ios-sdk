@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Constructor.
 
- @param mxSession the related 'MXSession'.
+ @param crypto the related 'MXCrypto'.
  */
 - (instancetype)initWithCrypto:(MXCrypto *)crypto;
 
@@ -74,6 +74,24 @@ NS_ASSUME_NONNULL_BEGIN
  @param transactionId the transaction to remove.
  */
 - (void)removeTransactionWithTransactionId:(NSString*)transactionId;
+
+
+
+- (void)beginKeyVerificationWithUserId:(NSString*)userId
+                           andDeviceId:(NSString*)deviceId
+                              dmRoomId:(nullable NSString*)dmRoomId
+                             dmEventId:(nullable NSString*)dmEventId
+                                method:(NSString*)method
+                               success:(void(^)(MXDeviceVerificationTransaction *transaction))success
+                               failure:(void(^)(NSError *error))failure;
+
+- (MXHTTPOperation*)sendMessage:(NSString*)userId
+                         roomId:(NSString*)roomId
+                      eventType:(NSString*)eventType
+                      relatedTo:(NSString*)relatedTo
+                        content:(NSDictionary*)content
+                        success:(void (^)(void))success
+                        failure:(void (^)(NSError *error))failure;
 
 @end
 
