@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) BOOL limited;
 
+- (instancetype)initWithChunk:(NSArray<MXEventReference*> *)chunk count:(NSUInteger)count limited:(BOOL)limited;
+
 @end
 
 NS_ASSUME_NONNULL_END

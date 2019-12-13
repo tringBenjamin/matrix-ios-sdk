@@ -18,6 +18,18 @@
 
 @implementation MXEventReferenceChunk
 
+- (instancetype)initWithChunk:(NSArray<MXEventReference*> *)chunk count:(NSUInteger)count limited:(BOOL)limited
+{
+    self = [super init];
+    if (self)
+    {
+        _chunk = chunk;
+        _count = count;
+        _limited = limited;
+    }
+    return self;
+}
+
 + (instancetype)modelFromJSON:(NSDictionary *)JSONDictionary
 {
     MXEventReferenceChunk *eventReferenceChunk;

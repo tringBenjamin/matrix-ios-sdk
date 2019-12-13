@@ -18,6 +18,18 @@
 
 @implementation MXEventReference
 
+- (instancetype)initWithEventId:(NSString *)eventId type:(NSString *)type
+{
+    self = [super init];
+    if (self)
+    {
+        _eventId = eventId;
+        _type = type;
+    }
+
+    return self;
+}
+
 + (instancetype)modelFromJSON:(NSDictionary *)JSONDictionary
 {
     MXEventReference *eventReference;

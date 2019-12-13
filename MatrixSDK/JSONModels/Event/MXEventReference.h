@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, nullable) NSString *type;
 
+
+- (instancetype)initWithEventId:(NSString *)eventId type:(nullable NSString *)type;
+
 @end
 
 NS_ASSUME_NONNULL_END
