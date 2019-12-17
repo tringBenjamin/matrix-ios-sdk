@@ -18,12 +18,14 @@
 
 
 #import "MXKeyVerificationRequest.h"
+#import "MXTransactionCancelCode.h"
+
+#import "MXHTTPOperation.h"
 
 @class MXDeviceVerificationTransaction, MXEvent;
 
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 #pragma mark - Constants
 
@@ -39,6 +41,15 @@ FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNotificationRequest
 
 
 @interface MXKeyVerificationRequestManager : NSObject
+
+/**
+ The timeout for requests.
+ Default is 5 min.
+ */
+@property (nonatomic) NSTimeInterval requestTimeout;
+
+
+#pragma mark - Network calls
 
 /**
  Make a key verification request by Direct Message.
@@ -79,16 +90,47 @@ FOUNDATION_EXPORT NSString *const MXDeviceVerificationManagerNotificationRequest
  @param failure a block called when the operation fails.
  */
 - (void)cancelVerificationRequest:(MXKeyVerificationRequest*)request
+                   withCancelCode:(MXTransactionCancelCode*)cancelCode
                           success:(void(^)(void))success
                           failure:(void(^)(NSError *error))failure;
+
+
+#pragma mark - Current requests
+
+/**
+ All pending verification requests.
+ */
+@property (nonatomic, readonly) NSArray<MXKeyVerificationRequest*> *pendingRequests;
+
+
+#pragma mark - Listener
+
+/**
+ Add a listener to request state updates
+
+ @param request The verification request to track.
+ @param block The block called on updates.
+ @return a listener id.
+ */
+- (id)listenToVerificationRequestStateUpdate:(MXKeyVerificationRequest *)request request:(void (^)(MXKeyVerificationRequest *request))block;
+- (void)removeListener:(id)listener;
+
+
+#pragma mark - Verification request by BM
 
 /**
  Extract a verification request from a Direct Message.
 
- @param event the event.
- @return a verification request.
+ @param eventId the event id of the message.
+ @param roomId the room id of the message.
+ @param success a block called when the operation succeeds.
+ @param failure a block called when the operation fails.
+ @return a MXHTTPOperation instance. May be nil in case of syncronous response
  */
-- (nullable MXKeyVerificationRequest*)verificationRequestInDMEvent:(MXEvent*)event;
+- (nullable MXHTTPOperation*)verificationByDMRequestFromEventId:(NSString*)eventId
+                                                         roomId:(NSString*)roomId
+                                                        success:(void(^)(MXKeyVerificationRequest *request))success
+                                                        failure:(void(^)(NSError *error))failure;
 
 @end
 

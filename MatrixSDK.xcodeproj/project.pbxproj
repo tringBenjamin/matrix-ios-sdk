@@ -222,6 +222,8 @@
 		327C3E4C23A39D91006183D1 /* MXAggregatedReferencesUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 327C3E4923A39D91006183D1 /* MXAggregatedReferencesUpdater.h */; };
 		327C3E4D23A39D91006183D1 /* MXAggregatedReferencesUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 327C3E4A23A39D91006183D1 /* MXAggregatedReferencesUpdater.m */; };
 		327C3E4E23A39D91006183D1 /* MXAggregatedReferencesUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 327C3E4A23A39D91006183D1 /* MXAggregatedReferencesUpdater.m */; };
+		327C3E5223A3CCC4006183D1 /* MXCryptoKeyVerificationRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 327C3E4F23A3CC8E006183D1 /* MXCryptoKeyVerificationRequestTests.m */; };
+		327C3E5323A3CCC5006183D1 /* MXCryptoKeyVerificationRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 327C3E4F23A3CC8E006183D1 /* MXCryptoKeyVerificationRequestTests.m */; };
 		327E37B61A974F75007F026F /* MXLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 327E37B41A974F75007F026F /* MXLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		327E37B71A974F75007F026F /* MXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 327E37B51A974F75007F026F /* MXLogger.m */; };
 		327E37B91A977810007F026F /* MXLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 327E37B81A977810007F026F /* MXLoggerTests.m */; };
@@ -1215,6 +1217,7 @@
 		327B348223A00E3F00B777CE /* MXKeyVerificationRequestManager_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MXKeyVerificationRequestManager_Private.h; sourceTree = "<group>"; };
 		327C3E4923A39D91006183D1 /* MXAggregatedReferencesUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MXAggregatedReferencesUpdater.h; sourceTree = "<group>"; };
 		327C3E4A23A39D91006183D1 /* MXAggregatedReferencesUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MXAggregatedReferencesUpdater.m; sourceTree = "<group>"; };
+		327C3E4F23A3CC8E006183D1 /* MXCryptoKeyVerificationRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXCryptoKeyVerificationRequestTests.m; sourceTree = "<group>"; };
 		327E37B41A974F75007F026F /* MXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLogger.h; sourceTree = "<group>"; };
 		327E37B51A974F75007F026F /* MXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLogger.m; sourceTree = "<group>"; };
 		327E37B81A977810007F026F /* MXLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLoggerTests.m; sourceTree = "<group>"; };
@@ -2339,6 +2342,7 @@
 				327E9ACE2284783E00A98BC1 /* MXEventAnnotationTests.swift */,
 				32B0E3E623A3864C0054FF1A /* MXEventReferenceTests.swift */,
 				329E808E22512DF500A48C3A /* MXCryptoDeviceVerificationTests.m */,
+				327C3E4F23A3CC8E006183D1 /* MXCryptoKeyVerificationRequestTests.m */,
 				322D01C322492B0700150C68 /* MXCryptoShareTests.m */,
 				32720DA1222EB5650086FFF5 /* MXAutoDiscoveryTests.m */,
 				32935F60216FA49D00A1BC24 /* MXCryptoBackupTests.m */,
@@ -3632,6 +3636,7 @@
 			files = (
 				329E808F22512DF500A48C3A /* MXCryptoDeviceVerificationTests.m in Sources */,
 				32DC15D71A8DFF0D006F9AD3 /* MXNotificationCenterTests.m in Sources */,
+				327C3E5223A3CCC4006183D1 /* MXCryptoKeyVerificationRequestTests.m in Sources */,
 				329571991B024D2B00ABB3BA /* MXMockCallStack.m in Sources */,
 				3281E8A819E41A2000976E1A /* MatrixSDKTestsData.m in Sources */,
 				322A51D81D9E846800C8536D /* MXCryptoTests.m in Sources */,
@@ -3911,6 +3916,7 @@
 			files = (
 				B1E09A282397FD010057C069 /* MXMockCallStackCall.m in Sources */,
 				B1E09A392397FD7D0057C069 /* MXMyUserTests.m in Sources */,
+				327C3E5323A3CCC5006183D1 /* MXCryptoKeyVerificationRequestTests.m in Sources */,
 				B1E09A202397FCE90057C069 /* MXCryptoBackupTests.m in Sources */,
 				B1E09A3B2397FD820057C069 /* MXStoreNoStoreTests.m in Sources */,
 				B1E09A242397FCE90057C069 /* MXPeekingRoomTests.m in Sources */,

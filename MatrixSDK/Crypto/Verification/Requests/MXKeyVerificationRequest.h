@@ -25,7 +25,8 @@ FOUNDATION_EXPORT NSString * _Nonnull const MXKeyVerificationRequestDidChangeNot
 
 typedef enum : NSUInteger
 {
-    MXKeyVerificationRequestStatePending = 0,
+    MXKeyVerificationRequestStateUnkwnown = 0,      // The state is not fully computed yet
+    MXKeyVerificationRequestStatePending,
     MXKeyVerificationRequestStateExpired,
     MXKeyVerificationRequestStateCancelled,
     MXKeyVerificationRequestStateCancelledByMe,
@@ -41,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MXKeyVerificationRequest : NSObject
 
 @property (nonatomic, readonly) NSString *requestId;
+
+@property (nonatomic, readonly) BOOL isFromMyUser;
 
 @property (nonatomic) NSString *to;
 

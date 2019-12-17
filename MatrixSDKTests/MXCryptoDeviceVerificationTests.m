@@ -697,11 +697,12 @@
                  XCTAssertNotNil(request);
 
                   // - Alice rejects the incoming request
-                 [aliceSession.crypto.deviceVerificationManager.requestManager cancelVerificationRequest:request success:^{
+                 [aliceSession.crypto.deviceVerificationManager.requestManager cancelVerificationRequest:request
+                                                                                          withCancelCode:MXTransactionCancelCode.user success:^{
 
-                 } failure:^(NSError * _Nonnull error) {
+                                                                                          } failure:^(NSError * _Nonnull error) {
 
-                 }];
+                                                                                          }];
              }
          }];
 

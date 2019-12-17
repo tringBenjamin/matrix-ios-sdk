@@ -209,36 +209,38 @@
 
         __block NSUInteger messagesCount = 0;
 
-        [roomFromBobPOV liveTimeline:^(MXEventTimeline *liveTimeline) {
-            [liveTimeline listenToEventsOfTypes:@[kMXEventTypeStringRoomMessage] onEvent:^(MXEvent *event, MXTimelineDirection direction, MXRoomState *roomState) {
-                if (++messagesCount == 5)
-                {
-                    readyToTest(aliceSession, bobSession, roomId, expectation);
-                }
-            }];
-        }];
+        readyToTest(aliceSession, bobSession, roomId, expectation);
 
-
-        // Send messages in expected order
-        [roomFromAlicePOV sendTextMessage:messagesFromAlice[0] success:^(NSString *eventId) {
-
-            [roomFromBobPOV sendTextMessage:messagesFromBob[0] success:^(NSString *eventId) {
-
-                [roomFromBobPOV sendTextMessage:messagesFromBob[1] success:^(NSString *eventId) {
-
-                    [roomFromBobPOV sendTextMessage:messagesFromBob[2] success:^(NSString *eventId) {
-
-                        [roomFromAlicePOV sendTextMessage:messagesFromAlice[1] success:nil failure:nil];
-
-                    } failure:nil];
-
-                } failure:nil];
-
-            } failure:nil];
-
-        } failure:^(NSError *error) {
-            NSAssert(NO, @"Cannot set up intial test conditions - error: %@", error);
-        }];
+//        [roomFromBobPOV liveTimeline:^(MXEventTimeline *liveTimeline) {
+//            [liveTimeline listenToEventsOfTypes:@[kMXEventTypeStringRoomMessage] onEvent:^(MXEvent *event, MXTimelineDirection direction, MXRoomState *roomState) {
+//                if (++messagesCount == 5)
+//                {
+//                    readyToTest(aliceSession, bobSession, roomId, expectation);
+//                }
+//            }];
+//        }];
+//
+//
+//        // Send messages in expected order
+//        [roomFromAlicePOV sendTextMessage:messagesFromAlice[0] success:^(NSString *eventId) {
+//
+//            [roomFromBobPOV sendTextMessage:messagesFromBob[0] success:^(NSString *eventId) {
+//
+//                [roomFromBobPOV sendTextMessage:messagesFromBob[1] success:^(NSString *eventId) {
+//
+//                    [roomFromBobPOV sendTextMessage:messagesFromBob[2] success:^(NSString *eventId) {
+//
+//                        [roomFromAlicePOV sendTextMessage:messagesFromAlice[1] success:nil failure:nil];
+//
+//                    } failure:nil];
+//
+//                } failure:nil];
+//
+//            } failure:nil];
+//
+//        } failure:^(NSError *error) {
+//            NSAssert(NO, @"Cannot set up intial test conditions - error: %@", error);
+//        }];
 
     }];
 }

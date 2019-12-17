@@ -42,7 +42,7 @@ NSString * const MXKeyVerificationRequestDidChangeNotification = @"MXKeyVerifica
     self = [super init];
     if (self)
     {
-        _state = MXKeyVerificationRequestStatePending;
+        _state = MXKeyVerificationRequestStateUnkwnown;
         _requestId = requestId;
         _to = to;
         _sender = sender;

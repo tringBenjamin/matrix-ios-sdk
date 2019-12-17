@@ -28,6 +28,8 @@
                      fromDevice:(NSString*)fromDevice
                      ageLocalTs:(uint64_t)ageLocalTs;
 
-- (void)setState:(MXKeyVerificationRequestState)state;
+// 
+@property (nonatomic) BOOL isFromMyUser;
+@property (nonatomic) MXKeyVerificationRequestState state;
 
 @end
