@@ -29,8 +29,8 @@
 /**
  Prefix used in path of home server API requests.
  */
-NSString *const kMXIdentityAPIPrefixPathV1 = @"_matrix/identity/api/v1";
-NSString *const kMXIdentityAPIPrefixPathV2 = @"_matrix/identity/v2";
+NSString *const kMXIdentityAPIPrefixPathV1 = @"identity/api/v1";
+NSString *const kMXIdentityAPIPrefixPathV2 = @"identity/v2";
 
 /**
  MXIdentityServerRestClient error domain

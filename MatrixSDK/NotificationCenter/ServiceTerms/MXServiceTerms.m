@@ -22,7 +22,7 @@
 #import "MXTools.h"
 
 
-NSString *const kMXIntegrationManagerAPIPrefixPathV1 = @"_matrix/integrations/v1";
+NSString *const kMXIntegrationManagerAPIPrefixPathV1 = @"integrations/v1";
 
 /**
  MXServiceTerms error domain

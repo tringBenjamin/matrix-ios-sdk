@@ -23,8 +23,8 @@
 
 #pragma mark - Constant definition
 static NSString *const kWellKnowPath = @".well-known/matrix/client";
-static NSString *const kVersionPath = @"_matrix/client/versions";
-static NSString *const kIdendityServerPingPath = @"_matrix/identity/api/v1";
+static NSString *const kVersionPath = @"client/versions";
+static NSString *const kIdendityServerPingPath = @"identity/api/v1";
 
 @interface MXAutoDiscoveryTests : XCTestCase
 @end

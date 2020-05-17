@@ -29,8 +29,8 @@
 /**
  Prefix used in path of home server API requests.
  */
-NSString *const kMXAPIPrefixPathR0 = @"_matrix/client/r0";
-NSString *const kMXAPIPrefixPathUnstable = @"_matrix/client/unstable";
+NSString *const kMXAPIPrefixPathR0 = @"client/r0";
+NSString *const kMXAPIPrefixPathUnstable = @"client/unstable";
 
 /**
  Account data types
@@ -235,7 +235,7 @@ MXAuthAction;
                         failure:(void (^)(NSError *error))failure
 {
     // There is no versioning in the path of this API
-    NSString *path = @"_matrix/client/versions";
+    NSString *path = @"client/versions";
 
     MXWeakify(self);
     return [httpClient requestWithMethod:@"GET"
@@ -450,7 +450,7 @@ MXAuthAction;
 
     if (self.credentials.homeServer)
     {
-        registerFallback = [[NSURL URLWithString:@"_matrix/static/client/register/" relativeToURL:[NSURL URLWithString:self.credentials.homeServer]] absoluteString];
+        registerFallback = [[NSURL URLWithString:@"static/client/register/" relativeToURL:[NSURL URLWithString:self.credentials.homeServer]] absoluteString];
     }
     return registerFallback;
 }
@@ -574,7 +574,7 @@ MXAuthAction;
 
     if (self.credentials.homeServer)
     {
-        loginFallback = [[NSURL URLWithString:@"/_matrix/static/client/login/" relativeToURL:[NSURL URLWithString:self.credentials.homeServer]] absoluteString];
+        loginFallback = [[NSURL URLWithString:@"static/client/login/" relativeToURL:[NSURL URLWithString:self.credentials.homeServer]] absoluteString];
     }
     return loginFallback;
 }
